@@ -64,9 +64,11 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'demo.urls'
+import os
+ROOT_DIR = os.path.dirname(__file__)
 
 TEMPLATE_DIRS = (
-    "G:/spikes/reappy/src/demo/templates",
+    os.path.join(ROOT_DIR,'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
