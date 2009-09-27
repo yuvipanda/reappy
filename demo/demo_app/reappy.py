@@ -50,20 +50,19 @@ class Application():
         save_file = file('since_id.data', 'w')
         cPickle.dump(self.since_id, save_file)
         save_file.close()
-        
+
     def run(self):
         url = _build_url(self.search_term, since_id=self.since_id)
         tweets = [Tweet(rd) for rd in _grab_results(url)['results']]
         if tweets:
             self.since_id = tweets[0].id
             self._persist_since_id()
-        
         for t in tweets:
             for r, h in self.handlers:
                 match = r.match(t.text)
                 if match:
                     kargs = match.groupdict()
-                    return h(t, **kargs)
+                    h(t, **kargs)
 
     def loop(self, poll_frequency=5):
         while True:
