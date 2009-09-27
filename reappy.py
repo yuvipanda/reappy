@@ -46,10 +46,18 @@ class Application():
         else:
             self.since_id = None
 
+    def _persist_since_id(self):
+        save_file = file('since_id.data', 'w')
+        cPickle.dump(self.since_id, save_file)
+        save_file.close()
+        
     def run(self):
         url = _build_url(self.search_term, since_id=self.since_id)
         tweets = [Tweet(rd) for rd in _grab_results(url)['results']]
-        if tweets: self.since_id = tweets[0].id
+        if tweets:
+            self.since_id = tweets[0].id
+            self._persist_since_id()
+        
         for t in tweets:
             for r, h in self.handlers:
                 match = r.match(t.text)
