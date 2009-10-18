@@ -39,7 +39,7 @@ class Tweet:
 class Application():
     def __init__(self, search_term, handlers):
         self.search_term = search_term
-        self.handlers = [(re.compile(r[0]), r[1]) for r in handlers]
+        self.handlers = [(re.compile(r[0], re.IGNORECASE), r[1]) for r in handlers]
         if os.path.exists('since_id.data'):
             since_id_file = file('since_id.data', 'r')
             self.since_id = cPickle.load(since_id_file)
