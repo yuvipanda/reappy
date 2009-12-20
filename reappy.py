@@ -21,13 +21,13 @@ class User:
 class Tweet:
     def __init__(self, data):
         self.user = User(data)
-        self.text = data['text']
+        self.raw_text = data['text']
         self.id = data['id']
         self.source = data['source']
         self.language = data['iso_language_code']
         self.created = parser.parse(data['created_at'])
         self.hashtags = hashtag_regex.findall(data['text'])
-
+        self.clean_text = hashtag_regex.sub("", self.raw_text)
     
 class Application():
     def __init__(self, handlers):
@@ -53,7 +53,7 @@ class Application():
             self._persist_since_id()
         for t in tweets:
             for r, h in self.handlers:
-                match = r.match(t.text)
+                match = r.match(t.raw_text)
                 if match:
                     kargs = match.groupdict()
                     h(t, **kargs)
