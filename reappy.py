@@ -11,8 +11,7 @@ except ImportError:
     import json
 
 USER_AGENT = "reappy application/0.1"
-
-
+hashtag_regex = re.compile(r"(?:[^&]|^)#([a-z0-9_\-]+)")
 
 class User:
     def __init__(self, data):
@@ -27,6 +26,7 @@ class Tweet:
         self.source = data['source']
         self.language = data['iso_language_code']
         self.created = parser.parse(data['created_at'])
+        self.hashtags = hashtag_regex.findall(data['text'])
 
     
 class Application():
