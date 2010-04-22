@@ -1,3 +1,6 @@
+# Author: Yuvi Panda (me@yuvi.in)
+# License: 3 Clause BSD (See LICENSE file)
+
 from urllib2 import urlopen, Request
 from urllib import urlencode
 from dateutil import parser

@@ -1,0 +1,24 @@
+reappy (Twitter Search Application framework)
+
+What is reappy?
+
+reappy is a Twitter Search Application Framework that lets you write twitter search apps (like @having).
+
+Hello World!
+
+Here is a little hello world program that prints "Hey <username>" everytime someone tweets with the word "Hi" in it.
+
+import reappy
+
+def print_hi(tweet):
+    print "%s just said hi!", % tweet.user.user_name
+
+app = reappy.application("hi",
+			[(".*", print_hi)]
+			)
+
+app.loop()
+
+
+That's all!
+
