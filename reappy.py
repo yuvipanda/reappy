@@ -30,7 +30,7 @@ class Tweet:
         self.raw_text = data['text']
         self.id = data['id']
         self.source = data['source']
-        self.language = data['iso_language_code']
+        self.language = data.get('iso_language_code', None)
         self.created = parser.parse(data['created_at'])
         self.hashtags = hashtag_regex.findall(data['text'])
         self.clean_text = hashtag_regex.sub("", self.raw_text)
