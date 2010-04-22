@@ -76,7 +76,7 @@ class SearchApplication(Application):
         
     def _persist_since_id(self):
         save_file = file('since_id.data', 'w')
-        cPickle.dump(self.since_id, save_file)
+        pickle.dump(self.since_id, save_file)
         save_file.close()
         
     def _grab_results(self, search_url):
