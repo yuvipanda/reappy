@@ -13,9 +13,9 @@ import reappy
 def print_hi(tweet):
     print "%s just said hi!", % tweet.user.user_name
 
-app = reappy.application("hi",
-			[(".*", print_hi)]
-			)
+app = reappy.SearchApplication("hi",
+				[(r".*", print_hi)]
+				)
 
 app.loop()
 
