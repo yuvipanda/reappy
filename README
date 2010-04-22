@@ -11,7 +11,7 @@ Here is a little hello world program that prints "Hey <username>" everytime some
 import reappy
 
 def print_hi(tweet):
-    print "%s just said hi!", % tweet.user.user_name
+    print "%s just said hi!" % (tweet.user.user_name)
 
 app = reappy.SearchApplication("hi",
 				[(r".*", print_hi)]
