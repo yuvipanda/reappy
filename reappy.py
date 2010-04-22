@@ -6,7 +6,10 @@ from urllib import urlencode
 from dateutil import parser
 import os
 import re
-import cPickle
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 import time
 try:
     import simplejson as json
@@ -37,13 +40,13 @@ class Application():
         self.handlers = [(re.compile(r[0], re.IGNORECASE), r[1]) for r in handlers]
         if os.path.exists('since_id.data'):
             since_id_file = file('since_id.data', 'r')
-            self.since_id = cPickle.load(since_id_file)
+            self.since_id = pickle.load(since_id_file)
         else:
             self.since_id = None
 
     def _persist_since_id(self):
         save_file = file('since_id.data', 'w')
-        cPickle.dump(self.since_id, save_file)
+        pickle.dump(self.since_id, save_file)
         save_file.close()
 
     def get_tweets_since(self, since_id):
